@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 def sigmoid(z):
     return 1.0 / (1.0 + np.exp(-z))
 
@@ -45,7 +44,7 @@ class LogisticRegressionGD(object):
     def predict(self, X):
         return np.where(self.net_input(X) >= 0.0, 1, 0)
 
-        # to samo ale inaczej
+        # same but different
         # return np.where(self.activation(self.net_input(X)) >= 0.5, 1, 0)
 
 
@@ -68,9 +67,9 @@ if __name__ == '__main__':
         z = np.arange(-10, 10, 0.1)
         phi_z = sigmoid(z)
         c1 = [cost_1(x) for x in z]
-        plt.plot(phi_z, c1, label='J(w) - jeśli y=1')
+        plt.plot(phi_z, c1, label='J(w) if y=1')
         c0 = [cost_0(x) for x in z]
-        plt.plot(phi_z, c0, linestyle='--', label='J(w) - jeśli y=0')
+        plt.plot(phi_z, c0, linestyle='--', label='J(w) if y=0')
         plt.ylim(0, 5.1)
         plt.xlim([0, 1])
         plt.xlabel('$\phi (z)$')
@@ -87,16 +86,16 @@ if __name__ == '__main__':
         iris = datasets.load_iris()
         X = iris.data[:, [2, 3]]
         y = iris.target
-        print('Etykiety klas: ', np.unique(y))
+        print('Class label: ', np.unique(y))
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1, stratify=y)
 
         # print(X.shape)
         # print(y.shape)
 
-        print('Liczba etykiet w zbiorze y:', np.bincount(y))
-        print('Liczba etykiet w zbiorze y_train:', np.bincount(y_train))
-        print('Liczba etykiet w zbiorze y_test:', np.bincount(y_test))
+        print('Number of labels in y data set:', np.bincount(self.y))
+        print('Number of labels in y_train data set:', np.bincount(self.y_train))
+        print('Number of labels in y_test data set:', np.bincount(self.y_test)))
 
         sc = StandardScaler()
         sc.fit(X_train)
@@ -113,7 +112,7 @@ if __name__ == '__main__':
         lrgd.fit(X_train_01_subset, y_train_01_subset)
         # lrgd.fit(X, y)
         plot_decision_regions(X=X_train_01_subset, y=y_train_01_subset, classifier=lrgd)
-        plt.xlabel('dłygość płatka standaryzowana ')
-        plt.ylabel('szerokość płatka standaryzowana')
+        plt.xlabel('Standardized sepal length in cm')
+        plt.ylabel('Standardized petal length in cm')
         plt.legend(loc='upper left')
         plt.show()
