@@ -13,9 +13,9 @@ class Iris_data():
 
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.3, random_state=1, stratify=self.y)
 
-        print('Liczba etykiet w zbiorze y:', np.bincount(self.y))
-        print('Liczba etykiet w zbiorze y_train:', np.bincount(self.y_train))
-        print('Liczba etykiet w zbiorze y_test:', np.bincount(self.y_test))
+        print('Number of labels in y data set:', np.bincount(self.y))
+        print('Number of labels in y_train data set:', np.bincount(self.y_train))
+        print('Number of labels in y_test data set:', np.bincount(self.y_test))
 
         sc = StandardScaler()
         sc.fit(self.X_train)
