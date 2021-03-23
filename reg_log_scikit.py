@@ -8,8 +8,8 @@ if __name__ == '__main__':
     lr = LogisticRegression(C=1000, random_state=1)
     lr.fit(iris.X_train_std, iris.y_train)
     plot_decision_regions(iris.X_combined_std, iris.y_combined, classifier=lr, test_idx=range(105,150))
-    plt.xlabel('długość płatka standaryzowana ')
-    plt.ylabel('szerokość płatka standaryzowana')
+    plt.xlabel('Standardized sepal length in cm')
+    plt.ylabel('Standardized petal length in cm')
     plt.legend(loc='upper left')
     # plt.show()
 
