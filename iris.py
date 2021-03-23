@@ -9,7 +9,7 @@ class Iris_data():
         iris = datasets.load_iris()
         self.X = iris.data[:, [2, 3]]
         self.y = iris.target
-        print('Etykiety klas: ', np.unique(self.y))
+        print('Class label: ', np.unique(self.y))
 
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.3, random_state=1, stratify=self.y)
 
