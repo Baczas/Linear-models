@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
-def plot_decision_regions(X, y, classifier, resolution=0.01):   # co tu sie odjaniepawla? w 'meshgrid' i dalej
+def plot_decision_regions(X, y, classifier, resolution=0.01):
     markers=('^', 'v', 'o', 's', 'x')   # list of markers
     colors=('red', 'blue', 'lightgreen', 'grey', 'cyan')    # list of marker colors
     cmap=ListedColormap(colors[:len(np.unique(y))])
@@ -22,12 +22,8 @@ def plot_decision_regions(X, y, classifier, resolution=0.01):   # co tu sie odja
     for idx, cl in enumerate(np.unique(y)):
         plt.scatter(x=X[y == cl, 0], y=X[y == cl, 1], alpha=0.8, c=colors[idx], marker=markers[idx], label=cl, edgecolor='black')
 
-
-
-
-
+        
 class Perceptron(object):
-
 
     def __init__(self, eta = 0.1, n_iter = 10, random_state = 1):
         self.eta = eta
@@ -56,8 +52,12 @@ class Perceptron(object):
     def predict(self, X):
         return np.where(self.net_input(X) >= 0.0, 1, -1)
 
-#df=pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data', header=None)
-df=pd.read_csv('iris.data', header=None)
+try:
+    df=pd.read_csv('iris.data', header=None)
+except:
+    df=pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data', header=None)
+    df.to_csv('iris.data', index=False, header=None)
+    
 #print(df.head())
 
 y = df.iloc[0:100,4].values  # choose first 100 values from 4th column
@@ -77,14 +77,15 @@ if False:
 
 ppn=Perceptron()    # values dont have to be defined because they have default values in '__init__' function
 ppn.fit(X, y)
+
 #plt.plot(range(1, len(ppn.errors_) + 1), ppn.errors_, marker='o')
-#plt.xlabel('Epoki')
-#plt.ylabel('liczba aktualizacji')
+#plt.xlabel('Iterarions')
+#plt.ylabel('Number of updates')
 #plt.show()
 
 if True:
     plot_decision_regions(X, y, classifier=ppn)
-    plt.xlabel('Długość działki [cm]')
-    plt.ylabel('Długość płatka [cm]')
+    plt.xlabel('Sepal length [cm]')
+    plt.ylabel('Petal lenght [cm]')
     plt.legend(loc='upper left')
     plt.show()
